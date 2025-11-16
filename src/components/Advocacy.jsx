@@ -18,46 +18,25 @@ const Advocacy = () => {
         {/* The Problem */}
         <div className="relative bg-gradient-to-r from-secondary via-teal-700 to-secondary/90 rounded-2xl shadow-2xl p-8 md:p-12 mb-12 text-white overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
-          <h3 className="heading-3 mb-6">The Problem</h3>
+          <h3 className="heading-3 mb-6">Logan's Case: A System Failure</h3>
           <p className="text-lg leading-relaxed mb-6">
-            South Carolina's current bail and bond system allows dangerous criminals to walk free while awaiting trial. These individuals pose a clear and present danger to our communities, yet they're released time and again—often with tragic consequences.
+            Logan Federico was killed by a man who should have been behind bars. Her alleged killer had 39 prior arrests and 25 felony charges on his record. South Carolina's bail system allowed him to walk free—with devastating consequences.
           </p>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
-              <div className="text-4xl font-bold mb-2">30%</div>
-              <p className="text-sm mb-3">Of violent crime defendants are rearrested while on pretrial release</p>
-              <a 
-                href="https://bjs.ojp.gov/topics/pretrial-release-and-detention" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-xs opacity-75 hover:opacity-100 underline transition-opacity"
-              >
-                Bureau of Justice Statistics →
-              </a>
+              <div className="text-4xl font-bold mb-2">39</div>
+              <p className="text-sm mb-3">Prior arrests for Alexander Dickey before he killed Logan</p>
+              <p className="text-xs opacity-75 italic">Verified from court records and testimony</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
-              <div className="text-4xl font-bold mb-2">25%</div>
-              <p className="text-sm mb-3">Of defendants charged with violent crimes commit new offenses while on bail</p>
-              <a 
-                href="https://www.justice.gov/archives/jm/criminal-resource-manual-9-principles-federal-prosecution" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-xs opacity-75 hover:opacity-100 underline transition-opacity"
-              >
-                Dept. of Justice Studies →
-              </a>
+              <div className="text-4xl font-bold mb-2">25</div>
+              <p className="text-sm mb-3">Felony charges on record—yet he remained free</p>
+              <p className="text-xs opacity-75 italic">Verified from court records and testimony</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
-              <div className="text-4xl font-bold mb-2">1,000+</div>
-              <p className="text-sm mb-3">Preventable deaths annually from crimes by defendants out on bond</p>
-              <a 
-                href="https://www.fbi.gov/how-we-can-help-you/more-fbi-services-and-information/ucr" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-xs opacity-75 hover:opacity-100 underline transition-opacity"
-              >
-                FBI Crime Data →
-              </a>
+              <div className="text-4xl font-bold mb-2">140+</div>
+              <p className="text-sm mb-3">Years he should have served for his crimes, according to Stephen Federico</p>
+              <p className="text-xs opacity-75 italic">Based on Congressional testimony</p>
             </div>
           </div>
         </div>

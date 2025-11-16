@@ -170,46 +170,53 @@ const AboutLogan = () => {
           {/* Biography Content */}
           <div className="space-y-6">
             <div>
-              <h3 className="heading-3 text-secondary mb-4">A Life of Love, Loyalty, and Light</h3>
+              <h3 className="heading-3 text-secondary mb-4">Remembering Logan Hailey Federico</h3>
               <p className="text-gray-700 leading-relaxed mb-4">
-                Logan Federico was more than a name in a news story—she was a vibrant young woman whose spirit touched everyone she met. Born and raised in Waxhaw, North Carolina, Logan approached life with infectious enthusiasm and unwavering loyalty to those she loved.
+                Logan Hailey Federico, 22, was a bright light taken far too soon. Born and raised in Waxhaw, North Carolina, Logan was pursuing her education degree at South Piedmont Community College with dreams of becoming a teacher.
               </p>
-              <p className="text-gray-700 leading-relaxed">
-                [Add more biographical details here - education, aspirations, personality traits, what made her special]
+              <p className="text-gray-700 leading-relaxed mb-4">
+                On May 3, 2025, while visiting friends in Columbia, South Carolina, Logan's life was tragically cut short. She is survived by her parents Stephen and Melissa Federico, and her younger brother Jacob.
               </p>
+              <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
+                <p className="text-sm text-gray-700 italic">
+                  To honor Logan's memory with personal stories, photos, and memories from those who knew her, please visit the Guestbook section or contact the family directly.
+                </p>
+              </div>
             </div>
 
-            {/* Her Passions */}
+            {/* Her Passions - Verified from family/media */}
             <div className="grid grid-cols-3 gap-4 py-6">
               <div className="text-center">
                 <div className="bg-secondary text-white rounded-full w-16 h-16 mx-auto flex items-center justify-center text-3xl mb-2">
                   🦅
                 </div>
                 <h4 className="font-semibold text-sm text-secondary">Eagles Fan</h4>
-                <p className="text-xs text-gray-600">Die-hard Philadelphia Eagles supporter</p>
+                <p className="text-xs text-gray-600">Philadelphia Eagles supporter</p>
               </div>
               <div className="text-center">
                 <div className="bg-primary text-white rounded-full w-16 h-16 mx-auto flex items-center justify-center text-3xl mb-2">
                   ✨
                 </div>
-                <h4 className="font-semibold text-sm text-primary-dark">Swiftie Forever</h4>
-                <p className="text-xs text-gray-600">Devoted Taylor Swift fan</p>
+                <h4 className="font-semibold text-sm text-primary-dark">Swiftie</h4>
+                <p className="text-xs text-gray-600">Taylor Swift fan</p>
               </div>
               <div className="text-center">
                 <div className="bg-gray-600 text-white rounded-full w-16 h-16 mx-auto flex items-center justify-center text-3xl mb-2">
                   ❤️
                 </div>
                 <h4 className="font-semibold text-sm text-secondary">Family First</h4>
-                <p className="text-xs text-gray-600">Unshakeable family loyalty</p>
+                <p className="text-xs text-gray-600">Devoted to family</p>
               </div>
             </div>
 
-            {/* Key Attributes */}
+            {/* Memorial Information */}
             <div className="bg-gray-50 rounded-xl p-6 border-l-4 border-primary">
-              <p className="text-gray-700 italic leading-relaxed">
-                "Logan's love for her family was legendary. She was fiercely protective, endlessly supportive, and the first to celebrate every victory—no matter how small."
+              <p className="text-gray-700 leading-relaxed mb-3">
+                Over 200 people attended Logan's celebration of life on May 22, 2025, at Cedar Creek Ranch in Waxhaw, NC. The family asked attendees to wear pink—"a pink out celebration of Logan."
               </p>
-              <p className="text-right text-sm text-gray-600 mt-2">— Family & Friends</p>
+              <p className="text-sm text-gray-600">
+                A GoFundMe was established to assist with funeral expenses and to begin a legacy in Logan's name.
+              </p>
             </div>
           </div>
         </div>

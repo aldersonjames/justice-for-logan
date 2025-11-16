@@ -4,61 +4,61 @@ const Timeline = () => {
   const [visibleItems, setVisibleItems] = useState(new Set())
   const itemRefs = useRef([])
 
-  // Timeline events data - easily updatable
+  // Timeline events data - verified dates and facts
   const events = [
     {
       id: 1,
       date: 'May 3, 2025',
-      title: "Logan's Tragic Death",
-      description: "Logan Federico's life was cut short in a preventable tragedy. A bright light was taken from this world far too soon.",
+      title: "Logan's Life Taken",
+      description: "22-year-old Logan Federico was fatally shot while visiting friends in Columbia, South Carolina. Her alleged killer had 39 prior arrests and 25 felony charges.",
       type: 'tragedy',
       icon: '🕊️'
     },
     {
       id: 2,
-      date: 'May 6, 2025',
-      title: 'Stephen Speaks Out',
-      description: "Stephen Federico courageously shared Logan's story with the world, vowing to turn grief into action and prevent similar tragedies.",
-      type: 'advocacy',
-      icon: '📢'
+      date: 'May 22, 2025',
+      title: 'Celebration of Life',
+      description: "Over 200 people gathered at Cedar Creek Ranch in Waxhaw, NC, wearing pink to honor Logan's memory and celebrate her vibrant spirit.",
+      type: 'community',
+      icon: '🕯️'
     },
     {
       id: 3,
-      date: 'May 23, 2025',
-      title: 'Community Vigil',
-      description: "Hundreds gathered to honor Logan's memory, showing the profound impact she had on everyone who knew her.",
-      type: 'community',
-      icon: '🕯️'
+      date: 'June 25, 2025',
+      title: 'Suspect Indicted',
+      description: "Alexander Dickey was indicted on 12 charges including murder, burglary, and possession of a weapon during a violent crime. He remains in jail without bond.",
+      type: 'advocacy',
+      icon: '⚖️'
     },
     {
       id: 4,
       date: 'September 29, 2025',
       title: 'Congressional Testimony',
-      description: "Stephen testified before Congress, advocating for policy changes to protect others and ensure Logan's legacy saves lives.",
+      description: "Stephen Federico testified before the House Judiciary Subcommittee in Charlotte, NC, calling for criminal justice reform and accountability for repeat offenders.",
       type: 'milestone',
       icon: '🏛️'
     },
     {
       id: 5,
-      date: 'Ongoing',
-      title: 'Building Awareness',
-      description: "Through media appearances and advocacy work, Logan's story continues to inspire change and action across the nation.",
+      date: 'October 2, 2025',
+      title: 'Death Penalty Sought',
+      description: "South Carolina Attorney General Alan Wilson called for the death penalty in Logan's case and assigned a senior attorney to assist prosecution.",
       type: 'advocacy',
-      icon: '📺'
+      icon: '📜'
     },
     {
       id: 6,
-      date: 'Future',
-      title: 'Legislative Victory',
-      description: "Working toward concrete policy changes that will honor Logan's memory and protect countless others.",
-      type: 'future',
-      icon: '⚖️'
+      date: 'Ongoing',
+      title: 'Fighting for Reform',
+      description: "Stephen Federico continues advocating for stricter bail requirements, judicial accountability, and federal prosecution of Logan's case.",
+      type: 'advocacy',
+      icon: '📢'
     },
     {
       id: 7,
       date: 'Future',
-      title: "Logan's Legacy Lives On",
-      description: "Every life saved, every policy changed, every heart touched - Logan's impact continues to grow.",
+      title: "Logan's Legacy",
+      description: "Working toward legislative changes to prevent repeat offenders from harming others and ensuring no family endures this preventable tragedy.",
       type: 'future',
       icon: '💝'
     }
