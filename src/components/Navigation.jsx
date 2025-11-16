@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
+import { config } from '../utils/config'
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -26,7 +27,7 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -40,6 +41,15 @@ const Navigation = () => {
                 {link.label}
               </Link>
             ))}
+            <a
+              href={config.goFundMeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-primary hover:bg-primary-dark text-white text-sm font-semibold rounded-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 flex items-center space-x-1"
+            >
+              <span>💜</span>
+              <span>Donate</span>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -79,6 +89,15 @@ const Navigation = () => {
                 {link.label}
               </Link>
             ))}
+            <a
+              href={config.goFundMeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block mx-3 mt-4 mb-2 px-4 py-3 bg-primary hover:bg-primary-dark text-white text-base font-semibold rounded-full transition-all duration-300 shadow-md text-center"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              💜 Donate (GoFundMe)
+            </a>
           </div>
         </div>
       )}
