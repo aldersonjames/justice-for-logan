@@ -1,0 +1,144 @@
+{
+  "events": [
+    {
+      "comment": "TEMPLATE - Copy this structure for new events",
+      "id": "unique-id-string",
+      "title": "Event Title",
+      "type": "vigil|court|advocacy|legislative",
+      "date": "YYYY-MM-DD",
+      "time": "HH:MM",
+      "endTime": "HH:MM (optional)",
+      "location": "Venue Name",
+      "address": "Full Street Address (optional)",
+      "description": "Detailed event description",
+      "organizer": "Organization or Person Name (optional)",
+      "contactEmail": "email@example.com (optional)",
+      "featured": "true|false (optional, default: false)",
+      "requiresRegistration": "true|false (optional)",
+      "registrationLink": "https://registration-url.com (optional)",
+      "capacity": "100 (optional, number)",
+      "ticketPrice": "$20 or free (optional)",
+      "transportationAvailable": "true|false (optional)",
+      "courtroom": "Room 5A (optional, for court events)",
+      "room": "Hearing Room 1 (optional, for legislative/advocacy)"
+    },
+    {
+      "comment": "EXAMPLE - Vigil Event",
+      "id": "vigil-001",
+      "title": "Memorial Candlelight Vigil",
+      "type": "vigil",
+      "date": "2025-12-01",
+      "time": "19:00",
+      "endTime": "21:00",
+      "location": "Community Park",
+      "address": "123 Main St, Philadelphia, PA 19101",
+      "description": "Join us for a peaceful candlelight vigil to remember Logan and honor her memory.",
+      "organizer": "Federico Family",
+      "contactEmail": "events@justiceforlogan.org",
+      "featured": true
+    },
+    {
+      "comment": "EXAMPLE - Court Date",
+      "id": "court-001",
+      "title": "Preliminary Hearing",
+      "type": "court",
+      "date": "2025-12-15",
+      "time": "09:00",
+      "endTime": "12:00",
+      "location": "Philadelphia Municipal Court",
+      "address": "1339 Chestnut St, Philadelphia, PA 19107",
+      "courtroom": "Room 5A",
+      "description": "Preliminary hearing for the case. Public attendance encouraged.",
+      "organizer": "Philadelphia District Attorney's Office",
+      "featured": true
+    },
+    {
+      "comment": "EXAMPLE - Advocacy Meeting",
+      "id": "advocacy-001",
+      "title": "Criminal Justice Reform Workshop",
+      "type": "advocacy",
+      "date": "2026-01-10",
+      "time": "18:00",
+      "endTime": "20:00",
+      "location": "Community Center",
+      "address": "456 Broad St, Philadelphia, PA 19102",
+      "description": "Educational workshop on criminal justice reform and victim's rights.",
+      "organizer": "Justice Reform Coalition",
+      "contactEmail": "info@justicereform.org",
+      "registrationLink": "https://example.com/register",
+      "requiresRegistration": true,
+      "capacity": 50,
+      "featured": false
+    },
+    {
+      "comment": "EXAMPLE - Legislative Hearing",
+      "id": "legislative-001",
+      "title": "Senate Bill 123 Public Hearing",
+      "type": "legislative",
+      "date": "2026-02-01",
+      "time": "10:00",
+      "endTime": "15:00",
+      "location": "Pennsylvania State Capitol",
+      "address": "501 North 3rd Street, Harrisburg, PA 17120",
+      "room": "Hearing Room 1",
+      "description": "Public hearing on Senate Bill 123 regarding enhanced penalties for reckless endangerment.",
+      "organizer": "PA Senate Judiciary Committee",
+      "contactEmail": "judiciary@pasenate.gov",
+      "registrationLink": "https://example.com/testimony",
+      "requiresRegistration": true,
+      "transportationAvailable": true,
+      "featured": true
+    }
+  ],
+  "notes": {
+    "required_fields": [
+      "id - Must be unique across all events",
+      "title - Name of the event",
+      "type - Must be: vigil, court, advocacy, or legislative",
+      "date - ISO format YYYY-MM-DD (e.g., 2025-12-25)",
+      "time - 24-hour format HH:MM (e.g., 18:00 for 6pm)",
+      "location - Venue name",
+      "description - Event details"
+    ],
+    "optional_fields": [
+      "endTime - When event ends",
+      "address - Full street address",
+      "organizer - Who is organizing",
+      "contactEmail - Contact information",
+      "featured - Highlight this event",
+      "requiresRegistration - Show registration badge",
+      "registrationLink - URL to register",
+      "capacity - Maximum attendees",
+      "ticketPrice - Cost or donation",
+      "transportationAvailable - Show transport badge",
+      "courtroom - For court events",
+      "room - For legislative/advocacy events"
+    ],
+    "event_types": {
+      "vigil": "Memorials, candlelight vigils, remembrance events - Pink color",
+      "court": "Hearings, arraignments, trials, legal proceedings - Teal color",
+      "advocacy": "Community meetings, fundraisers, workshops, town halls - Purple color",
+      "legislative": "Government hearings, bill discussions, testimony - Blue color"
+    },
+    "date_format_examples": [
+      "2025-01-15 - January 15, 2025",
+      "2025-12-25 - December 25, 2025",
+      "2026-06-30 - June 30, 2026"
+    ],
+    "time_format_examples": [
+      "09:00 - 9:00 AM",
+      "13:30 - 1:30 PM",
+      "18:00 - 6:00 PM",
+      "23:59 - 11:59 PM"
+    ],
+    "tips": [
+      "Keep descriptions concise but informative",
+      "Always include location and time",
+      "Use 'featured' for important events",
+      "Provide registration links when needed",
+      "Include contact info for questions",
+      "Remove or archive past events periodically",
+      "Test changes locally before deploying"
+    ]
+  }
+}

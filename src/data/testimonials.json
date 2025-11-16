@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Sarah Mitchell",
+    "relationship": "Best Friend",
+    "quote": "Logan had this incredible ability to light up every room she walked into. Her laugh was contagious, her spirit unbreakable. She taught me what it means to live authentically and love fearlessly. The world lost something truly special when we lost Logan, but her impact on all of us will last forever.",
+    "image": "/placeholder-avatar-1.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Marcus Johnson",
+    "relationship": "Community Member",
+    "quote": "Watching Logan's family fight for justice has been nothing short of inspiring. Their strength in the face of unimaginable tragedy shows what true advocacy looks like. This isn't just about Logan - it's about making sure no other family has to go through what they've endured. We stand with them, now and always.",
+    "image": "/placeholder-avatar-2.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Emily Rodriguez",
+    "relationship": "Former Classmate",
+    "quote": "Logan was the kind of person who genuinely cared about everyone she met. She had dreams, plans for the future, and so much life ahead of her. It's heartbreaking that those dreams were stolen. But seeing her family's courage and determination to seek justice gives me hope that Logan's legacy will spark real change.",
+    "image": "/placeholder-avatar-3.jpg"
+  },
+  {
+    "id": 4,
+    "name": "David Chen",
+    "relationship": "Neighbor",
+    "quote": "I've known Logan's family for years, and the strength they've shown through this tragedy is remarkable. They could have retreated into grief, but instead they're fighting to prevent other families from experiencing this pain. Their advocacy work is changing lives and saving lives. Logan would be so proud of them.",
+    "image": "/placeholder-avatar-4.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Rebecca Thompson",
+    "relationship": "Family Friend",
+    "quote": "Logan's smile could brighten the darkest day. She was kind, compassionate, and full of life. What happened to her should never happen to anyone. Her family's relentless pursuit of justice and their efforts to raise awareness about these issues is transforming tragedy into purpose. We're all behind them.",
+    "image": "/placeholder-avatar-5.jpg"
+  },
+  {
+    "id": 6,
+    "name": "James Patterson",
+    "relationship": "Advocacy Partner",
+    "quote": "Working alongside Logan's family in their advocacy efforts has been humbling. They've taken their deepest pain and channeled it into a movement that's making real legislative change. Their courage to speak out, to share their story, to demand accountability - it's creating a safer world for all of us. This is Logan's lasting impact.",
+    "image": "/placeholder-avatar-6.jpg"
+  }
+]

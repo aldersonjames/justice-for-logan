@@ -1,0 +1,197 @@
+{
+  "resources": [
+    {
+      "id": 1,
+      "name": "SC State Senate",
+      "description": "Contact South Carolina State Senators to advocate for criminal justice and bail reform legislation.",
+      "link": "https://www.scstatehouse.gov/senate.php",
+      "category": "legislators",
+      "icon": "government"
+    },
+    {
+      "id": 2,
+      "name": "SC House of Representatives",
+      "description": "Reach out to your State Representatives to support bail reform initiatives and victim protection laws.",
+      "link": "https://www.scstatehouse.gov/house.php",
+      "category": "legislators",
+      "icon": "government"
+    },
+    {
+      "id": 3,
+      "name": "Governor Henry McMaster's Office",
+      "description": "Contact the Governor's office to express support for criminal justice reform in South Carolina.",
+      "link": "https://governor.sc.gov/contact",
+      "category": "legislators",
+      "icon": "government"
+    },
+    {
+      "id": 4,
+      "name": "Pretrial Justice Institute",
+      "description": "Leading organization providing research, advocacy, and resources on bail reform and pretrial justice.",
+      "link": "https://www.pretrialinstitute.org/",
+      "category": "bail-reform",
+      "icon": "scales"
+    },
+    {
+      "id": 5,
+      "name": "Bureau of Justice Statistics - Pretrial Release",
+      "description": "Federal data and statistics on pretrial release, detention, and reoffending rates across the United States.",
+      "link": "https://bjs.ojp.gov/topics/pretrial-release-and-detention",
+      "category": "bail-reform",
+      "icon": "chart"
+    },
+    {
+      "id": 6,
+      "name": "National Institute of Justice",
+      "description": "Research and evidence-based practices for improving bail and pretrial decision-making.",
+      "link": "https://nij.ojp.gov/topics/courts/pretrial-release-and-detention",
+      "category": "bail-reform",
+      "icon": "research"
+    },
+    {
+      "id": 7,
+      "name": "Crime Victims' Rights Information",
+      "description": "Comprehensive federal resource for understanding victims' rights in the criminal justice system.",
+      "link": "https://www.justice.gov/crimevictims",
+      "category": "victim-support",
+      "icon": "shield"
+    },
+    {
+      "id": 8,
+      "name": "South Carolina Victim Assistance Network",
+      "description": "State coalition providing victim advocacy, support services, and rights information for South Carolina residents.",
+      "link": "https://www.scvan.org/",
+      "category": "victim-support",
+      "icon": "heart"
+    },
+    {
+      "id": 9,
+      "name": "National Center for Victims of Crime",
+      "description": "Leading resource for crime victims offering assistance, advocacy, and education nationwide.",
+      "link": "https://victimsofcrime.org/",
+      "category": "victim-support",
+      "icon": "support"
+    },
+    {
+      "id": 10,
+      "name": "Parents of Murdered Children (POMC)",
+      "description": "Support organization providing resources, peer support, and advocacy for families who have lost loved ones to homicide.",
+      "link": "https://pomc.org/",
+      "category": "victim-support",
+      "icon": "group"
+    },
+    {
+      "id": 11,
+      "name": "SC Legal Services",
+      "description": "Free civil legal assistance for eligible South Carolina residents including victims of crime.",
+      "link": "https://sclegal.org/",
+      "category": "legal",
+      "icon": "gavel"
+    },
+    {
+      "id": 12,
+      "name": "American Bar Association - Criminal Justice",
+      "description": "Resources on criminal justice standards, reforms, and legal advocacy initiatives.",
+      "link": "https://www.americanbar.org/groups/criminal_justice/",
+      "category": "legal",
+      "icon": "book"
+    },
+    {
+      "id": 13,
+      "name": "National Association of Criminal Defense Lawyers",
+      "description": "Information on pretrial justice, bail reform, and defendants' rights for legal professionals and advocates.",
+      "link": "https://www.nacdl.org/",
+      "category": "legal",
+      "icon": "legal"
+    },
+    {
+      "id": 14,
+      "name": "988 Suicide & Crisis Lifeline",
+      "description": "24/7 free and confidential support for people in distress, including grief and trauma support.",
+      "link": "https://988lifeline.org/",
+      "category": "mental-health",
+      "icon": "phone",
+      "phone": "988"
+    },
+    {
+      "id": 15,
+      "name": "The Compassionate Friends",
+      "description": "National nonprofit providing grief support for families who have experienced the death of a child.",
+      "link": "https://www.compassionatefriends.org/",
+      "category": "mental-health",
+      "icon": "compassion"
+    },
+    {
+      "id": 16,
+      "name": "National Alliance on Mental Illness (NAMI)",
+      "description": "Mental health advocacy and support including resources for families dealing with trauma and grief.",
+      "link": "https://www.nami.org/",
+      "category": "mental-health",
+      "icon": "brain"
+    },
+    {
+      "id": 17,
+      "name": "Crime Survivors for Safety and Justice",
+      "description": "National network of crime survivors advocating for criminal justice reforms that enhance public safety.",
+      "link": "https://allianceforsafetyandjustice.org/crimesurvivorsspeakout/",
+      "category": "victim-support",
+      "icon": "voice"
+    },
+    {
+      "id": 18,
+      "name": "Equal Justice Initiative",
+      "description": "Organization committed to challenging injustice and reforming the criminal justice system.",
+      "link": "https://eji.org/",
+      "category": "legal",
+      "icon": "justice"
+    },
+    {
+      "id": 19,
+      "name": "The Marshall Project",
+      "description": "Nonprofit journalism about criminal justice with in-depth reporting on bail reform and pretrial justice.",
+      "link": "https://www.themarshallproject.org/",
+      "category": "media",
+      "icon": "news"
+    },
+    {
+      "id": 20,
+      "name": "The Bail Project",
+      "description": "National organization working to combat mass incarceration and provide data on bail system impact.",
+      "link": "https://bailproject.org/",
+      "category": "bail-reform",
+      "icon": "nonprofit"
+    }
+  ],
+  "categories": {
+    "legislators": {
+      "name": "South Carolina Legislators",
+      "description": "Contact your elected officials to advocate for criminal justice reform",
+      "color": "secondary"
+    },
+    "bail-reform": {
+      "name": "Bail Reform Information",
+      "description": "Research, statistics, and advocacy resources for pretrial justice reform",
+      "color": "primary"
+    },
+    "victim-support": {
+      "name": "Victim Support",
+      "description": "Organizations providing assistance and advocacy for crime victims and their families",
+      "color": "primary-dark"
+    },
+    "legal": {
+      "name": "Legal Resources",
+      "description": "Legal assistance, advocacy, and information on criminal justice",
+      "color": "secondary-dark"
+    },
+    "mental-health": {
+      "name": "Mental Health Support",
+      "description": "Counseling, grief support, and crisis intervention services",
+      "color": "accent"
+    },
+    "media": {
+      "name": "Media Resources",
+      "description": "Journalism and reporting on criminal justice reform issues",
+      "color": "secondary-light"
+    }
+  }
+}

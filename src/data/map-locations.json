@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "name": "Waxhaw, NC",
+    "type": "hometown",
+    "coordinates": [34.9243, -80.7434],
+    "title": "Logan's Hometown",
+    "description": "Where Logan grew up, went to school, and touched countless lives with her kindness, intelligence, and bright spirit. This is where her story began.",
+    "icon": "home",
+    "color": "#FF69B4",
+    "significance": "Home"
+  },
+  {
+    "id": 2,
+    "name": "Columbia, SC",
+    "type": "tragedy",
+    "coordinates": [34.0007, -81.0348],
+    "title": "Site of Tragedy",
+    "description": "May 3, 2025 - Where Logan's life was tragically and preventably taken. This location serves as a solemn reminder of why we must fight for justice and reform.",
+    "icon": "memorial",
+    "color": "#4B5563",
+    "significance": "Memorial"
+  },
+  {
+    "id": 3,
+    "name": "Charlotte, NC",
+    "type": "advocacy",
+    "coordinates": [35.2271, -80.8431],
+    "title": "Advocacy Hub",
+    "description": "Major city where numerous advocacy events, media appearances, and community gatherings have taken place to raise awareness and demand change.",
+    "icon": "megaphone",
+    "color": "#004C54",
+    "significance": "Advocacy"
+  },
+  {
+    "id": 4,
+    "name": "Washington, DC",
+    "type": "milestone",
+    "coordinates": [38.9072, -77.0369],
+    "title": "Congressional Testimony",
+    "description": "September 29, 2025 - Where Stephen Federico testified before Congress, bringing Logan's story to the national stage and advocating for policy reform to protect others.",
+    "icon": "capitol",
+    "color": "#6366F1",
+    "significance": "Legislative Action"
+  }
+]

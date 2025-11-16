@@ -1,0 +1,97 @@
+{
+  "lastUpdated": "2025-11-11",
+  "metrics": [
+    {
+      "id": "media",
+      "label": "Media Articles Published",
+      "value": 47,
+      "icon": "newspaper",
+      "color": "from-pink-500 to-rose-600",
+      "description": "News stories sharing Logan's story and our mission",
+      "milestone": 50,
+      "showProgress": true
+    },
+    {
+      "id": "reach",
+      "label": "People Reached",
+      "value": 125000,
+      "icon": "users",
+      "color": "from-purple-500 to-indigo-600",
+      "description": "Lives touched through media coverage and social platforms",
+      "format": "abbreviated",
+      "showProgress": false
+    },
+    {
+      "id": "signatures",
+      "label": "Petition Signatures",
+      "value": 8342,
+      "icon": "pencil",
+      "color": "from-blue-500 to-cyan-600",
+      "description": "Voices demanding criminal justice reform",
+      "milestone": 10000,
+      "showProgress": true
+    },
+    {
+      "id": "donations",
+      "label": "Funds Raised",
+      "value": 67500,
+      "icon": "heart",
+      "color": "from-pink-600 to-red-600",
+      "description": "Supporting advocacy efforts and Logan's memorial",
+      "format": "currency",
+      "showProgress": false
+    },
+    {
+      "id": "events",
+      "label": "Events Held",
+      "value": 23,
+      "icon": "calendar",
+      "color": "from-teal-500 to-emerald-600",
+      "description": "Community gatherings and awareness campaigns",
+      "showProgress": false
+    },
+    {
+      "id": "legislative",
+      "label": "Legislative Contacts",
+      "value": 312,
+      "icon": "building",
+      "color": "from-indigo-600 to-blue-700",
+      "description": "Lawmakers contacted about bail reform",
+      "showProgress": false
+    },
+    {
+      "id": "supporters",
+      "label": "Community Supporters",
+      "value": 4567,
+      "icon": "heart-group",
+      "color": "from-rose-500 to-pink-600",
+      "description": "People actively engaged in our movement",
+      "format": "abbreviated",
+      "showProgress": false
+    },
+    {
+      "id": "social",
+      "label": "Social Media Reach",
+      "value": 2800000,
+      "icon": "share",
+      "color": "from-violet-500 to-purple-600",
+      "description": "Total impressions across all platforms",
+      "format": "abbreviated",
+      "showProgress": false
+    }
+  ],
+  "highlights": [
+    {
+      "text": "Featured in major news outlets including Fox News and local South Carolina media",
+      "icon": "star"
+    },
+    {
+      "text": "Working directly with state legislators on bail reform legislation",
+      "icon": "badge"
+    },
+    {
+      "text": "Building a coalition of families affected by similar tragedies",
+      "icon": "people"
+    }
+  ]
+}

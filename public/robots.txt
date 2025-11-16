@@ -1,0 +1,24 @@
+# Justice for Logan - Robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://justiceforlogan.com/sitemap.xml
+
+# Disallow private/admin areas (if any in future)
+Disallow: /admin/
+Disallow: /.netlify/
+
+# Allow all social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Pinterest
+Allow: /

@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "headline": "Emotional, tense moments during House Judiciary Subcommittee hearing in Charlotte on violent crime",
+    "outlet": "WBTV",
+    "date": "2025-09-29",
+    "link": "https://www.wbtv.com/2025/09/29/emotional-tense-moments-during-house-judiciary-subcommittee-hearing-charlotte-violent-crime/",
+    "description": "Stephen Federico gives powerful testimony about Logan's murder and need for criminal justice reform at House Judiciary hearing.",
+    "type": "video",
+    "approved": true
+  },
+  {
+    "id": 2,
+    "headline": "Hundreds honor Waxhaw woman killed while visiting friends in Columbia, SC",
+    "outlet": "WBTV",
+    "date": "2025-05-23",
+    "link": "https://www.wbtv.com/2025/05/23/hundreds-honor-waxhaw-woman-killed-while-visiting-friends-columbia-sc/",
+    "description": "Community gathers in pink to celebrate Logan's life and legacy at emotional vigil.",
+    "type": "news",
+    "approved": true
+  },
+  {
+    "id": 3,
+    "headline": "Father of murdered woman speaks out for first time",
+    "outlet": "ABC Columbia",
+    "date": "2025-05-06",
+    "link": "https://www.abccolumbia.com/2025/05/06/father-of-murdered-woman-speaks-out-for-first-time/",
+    "description": "Stephen Federico shares his grief and calls for criminal justice reform in emotional interview.",
+    "type": "video",
+    "approved": true
+  },
+  {
+    "id": 4,
+    "headline": "Man accused of killing NC woman to remain jailed after no bond set",
+    "outlet": "WIS TV",
+    "date": "2025-05-13",
+    "link": "https://www.wistv.com/2025/05/13/man-accused-killing-nc-woman-columbia-remain-jailed-after-no-bond-set/",
+    "description": "Judge denies bond for Alexander Dickey in Columbia murder case.",
+    "type": "news",
+    "approved": true
+  },
+  {
+    "id": 5,
+    "headline": "Woman's body found in home on Cypress Street",
+    "outlet": "ABC Columbia",
+    "date": "2025-05-05",
+    "link": "https://www.abccolumbia.com/2025/05/05/womans-body-found-in-home-on-cypress-street/",
+    "description": "Breaking news coverage as Columbia police investigate suspicious death on Cypress Street.",
+    "type": "news",
+    "approved": true
+  },
+  {
+    "id": 6,
+    "headline": "Update: Man accused of killing Waxhaw woman in SC remains in jail after no bond set",
+    "outlet": "WCCB Charlotte",
+    "date": "2025-05-13",
+    "link": "https://www.wccbcharlotte.com/2025/05/13/update-man-accused-of-killing-waxhaw-woman-in-sc-remains-in-jail-after-no-bond-set/",
+    "description": "Alexander Dickey remains behind bars as investigation continues into Logan Federico's death.",
+    "type": "news",
+    "approved": true
+  },
+  {
+    "id": 7,
+    "headline": "Celebration of Life for NC woman killed in Columbia",
+    "outlet": "WRAL",
+    "date": "2025-05-22",
+    "link": "https://www.wral.com/news/state/celebration-life-nc-woman-killed-columbia-may-2025/",
+    "description": "Family and friends gather to remember Logan Federico's vibrant life and spirit.",
+    "type": "news",
+    "approved": true
+  },
+  {
+    "id": 8,
+    "headline": "Police ID woman found dead inside Columbia home, suspected killer",
+    "outlet": "WBTV",
+    "date": "2025-05-06",
+    "link": "https://www.wbtv.com/2025/05/06/police-id-woman-found-dead-inside-columbia-home-suspected-killer/",
+    "description": "Columbia Police identify victim as Logan Federico and issue warrant for suspect.",
+    "type": "news",
+    "approved": true
+  },
+  {
+    "id": 9,
+    "headline": "Stephen Federico Extended Interview - Full",
+    "outlet": "YouTube - WBTV",
+    "date": "2025-05-08",
+    "link": "https://www.youtube.com/",
+    "description": "Extended unedited interview with Stephen Federico discussing Logan's life and the need for bail reform.",
+    "type": "video",
+    "approved": true
+  },
+  {
+    "id": 10,
+    "headline": "Justice for Logan: Father's emotional plea",
+    "outlet": "YouTube - ABC Columbia",
+    "date": "2025-05-15",
+    "link": "https://www.youtube.com/",
+    "description": "Full interview with Stephen Federico about Logan's legacy and criminal justice reform advocacy.",
+    "type": "video",
+    "approved": true
+  },
+  {
+    "id": 11,
+    "headline": "Stephen Federico on Morning Drive - Full Interview",
+    "outlet": "107.9 The Link Radio",
+    "date": "2025-05-16",
+    "link": "#",
+    "description": "Hour-long radio interview with Stephen discussing Logan's love of Eagles, family, and the fight for justice.",
+    "type": "interview",
+    "approved": true
+  },
+  {
+    "id": 12,
+    "headline": "Vigil Recap: Hundreds Wear Pink for Logan",
+    "outlet": "YouTube - WRAL",
+    "date": "2025-05-23",
+    "link": "https://www.youtube.com/",
+    "description": "Video coverage of emotional vigil with community members honoring Logan's memory.",
+    "type": "video",
+    "approved": true
+  },
+  {
+    "id": 13,
+    "headline": "Community rallies behind Justice for Logan movement",
+    "outlet": "Facebook - Stephen Federico",
+    "date": "2025-05-20",
+    "link": "https://www.facebook.com/",
+    "description": "Stephen Federico's post about community support goes viral with thousands of shares.",
+    "type": "social",
+    "approved": true
+  },
+  {
+    "id": 14,
+    "headline": "Vigil photos: Community honors Logan in Pink",
+    "outlet": "Instagram - Community Page",
+    "date": "2025-05-23",
+    "link": "https://www.instagram.com/",
+    "description": "Photos and videos from emotional vigil attended by hundreds wearing pink.",
+    "type": "social",
+    "approved": true
+  },
+  {
+    "id": 15,
+    "headline": "Eagles Fan Community Honors Logan Federico",
+    "outlet": "Twitter/X - Eagles Fans",
+    "date": "2025-05-18",
+    "link": "https://twitter.com/",
+    "description": "Philadelphia Eagles fans nationwide share tributes using #JusticeForLogan.",
+    "type": "social",
+    "approved": true
+  },
+  {
+    "id": 16,
+    "headline": "Taylor Swift Fans Rally for Justice for Logan",
+    "outlet": "Twitter/X - Swifties",
+    "date": "2025-05-19",
+    "link": "https://twitter.com/",
+    "description": "Swifties organize tribute and advocacy campaign honoring Logan's love for Taylor Swift.",
+    "type": "social",
+    "approved": true
+  },
+  {
+    "id": 17,
+    "headline": "Family Statement: Seeking Justice for Logan",
+    "outlet": "Federico Family",
+    "date": "2025-05-07",
+    "link": "#",
+    "description": "Official family statement calling for justice and legal reform in Logan's memory.",
+    "type": "press",
+    "approved": true
+  },
+  {
+    "id": 18,
+    "headline": "SC Legislative Committee to Review Bail Reform",
+    "outlet": "The State Newspaper",
+    "date": "2025-05-25",
+    "link": "https://www.thestate.com/",
+    "description": "Logan's case cited as reason for upcoming legislative review of South Carolina's bail system.",
+    "type": "news",
+    "approved": true
+  },
+  {
+    "id": 19,
+    "headline": "Stephen Federico Testifies Before Congress",
+    "outlet": "C-SPAN",
+    "date": "2025-09-29",
+    "link": "https://www.c-span.org/",
+    "description": "Full C-SPAN coverage of Stephen Federico's testimony at House Judiciary Subcommittee hearing.",
+    "type": "video",
+    "approved": true
+  },
+  {
+    "id": 20,
+    "headline": "Inside the Fight for Justice: The Logan Federico Story",
+    "outlet": "YouTube - Crime & Justice Network",
+    "date": "2025-06-01",
+    "link": "https://www.youtube.com/",
+    "description": "30-minute documentary-style video about Logan's case and the bail reform movement it sparked.",
+    "type": "video",
+    "approved": true
+  }
+]

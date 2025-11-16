@@ -1,0 +1,27 @@
+# Archive - development files not needed in production
+archive/
+
+# Development files
+*.md
+!README.md
+.DS_Store
+.github/
+.specify/
+.claude/
+
+# Source files (already built into dist/)
+src/
+scripts/
+
+# Config files not needed in production
+eslint.config.js
+postcss.config.js
+tailwind.config.js
+vite.config.js
+
+# Package files (dependencies installed on Netlify)
+package-lock.json
+node_modules/
+
+# Environment example
+.env.example
