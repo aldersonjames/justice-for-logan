@@ -40,6 +40,17 @@ const AboutLogan = () => {
   const [thumbnailStart, setThumbnailStart] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [editMode, setEditMode] = useState(false)
+  const [imageRotations, setImageRotations] = useState(() => {
+    // Load rotations from localStorage on mount
+    const saved = localStorage.getItem('imageRotations')
+    return saved ? JSON.parse(saved) : { ...rotatedImages }
+  })
+
+  // Save rotations to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('imageRotations', JSON.stringify(imageRotations))
+  }, [imageRotations])
 
   // Auto-advance slideshow every 5 seconds
   useEffect(() => {
@@ -73,6 +84,23 @@ const AboutLogan = () => {
     }, 300)
   }
 
+  const rotateCurrentImage = (direction) => {
+    const currentImage = galleryImages[currentImageIndex]
+    const currentRotation = imageRotations[currentImage] || 0
+    const newRotation = direction === 'cw'
+      ? (currentRotation + 90) % 360
+      : (currentRotation - 90 + 360) % 360
+
+    setImageRotations(prev => ({
+      ...prev,
+      [currentImage]: newRotation === 0 ? undefined : newRotation
+    }))
+  }
+
+  const getCurrentRotation = () => {
+    return imageRotations[galleryImages[currentImageIndex]] || 0
+  }
+
   const visibleThumbnails = galleryImages.slice(thumbnailStart, thumbnailStart + 3)
   const hasMoreBefore = thumbnailStart > 0
   const hasMoreAfter = thumbnailStart + 3 < galleryImages.length
@@ -88,6 +116,14 @@ const AboutLogan = () => {
         <div className="text-center mb-16">
           <h2 className="heading-2 text-secondary mb-4">About Logan</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary via-pink-500 to-primary-dark mx-auto"></div>
+
+          {/* Edit Mode Toggle */}
+          <button
+            onClick={() => setEditMode(!editMode)}
+            className="mt-4 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white text-sm font-semibold rounded-full transition-all duration-300 shadow-md"
+          >
+            {editMode ? '✓ Exit Edit Mode' : '⚙️ Edit Photo Orientations'}
+          </button>
         </div>
 
         {/* Two Column Layout */}
@@ -106,14 +142,51 @@ const AboutLogan = () => {
                   isTransitioning ? 'opacity-0' : 'opacity-100'
                 }`}
                 style={{
-                  transform: rotatedImages[galleryImages[currentImageIndex]]
-                    ? `rotate(${rotatedImages[galleryImages[currentImageIndex]]}deg)`
+                  transform: getCurrentRotation()
+                    ? `rotate(${getCurrentRotation()}deg)`
                     : 'none'
                 }}
                 onError={(e) => {
                   e.target.src = '/images/logan-memorial.jpg'
                 }}
               />
+
+              {/* Rotation Controls - Only visible in edit mode */}
+              {editMode && (
+                <div className="absolute top-4 left-1/2 -translate-x-1/2 flex gap-2 bg-black/70 p-2 rounded-lg z-20">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      rotateCurrentImage('ccw')
+                    }}
+                    className="px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded text-sm font-semibold flex items-center gap-1"
+                    title="Rotate 90° counter-clockwise"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                    </svg>
+                    ↺ CCW
+                  </button>
+                  <div className="px-3 py-2 bg-gray-800 text-white rounded text-sm font-mono">
+                    {getCurrentRotation()}°
+                  </div>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      rotateCurrentImage('cw')
+                    }}
+                    className="px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded text-sm font-semibold flex items-center gap-1"
+                    title="Rotate 90° clockwise"
+                  >
+                    CW ↻
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                    </svg>
+                  </button>
+                </div>
+              )}
               {/* Click to expand overlay */}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 rounded-full p-3 text-gray-800">
@@ -318,8 +391,8 @@ const AboutLogan = () => {
               alt={`Logan Federico - Photo ${currentImageIndex + 1}`}
               className="max-w-full max-h-[90vh] object-contain"
               style={{
-                transform: rotatedImages[galleryImages[currentImageIndex]]
-                  ? `rotate(${rotatedImages[galleryImages[currentImageIndex]]}deg)`
+                transform: getCurrentRotation()
+                  ? `rotate(${getCurrentRotation()}deg)`
                   : 'none'
               }}
             />
