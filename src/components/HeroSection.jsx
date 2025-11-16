@@ -19,7 +19,7 @@ const HeroSection = () => {
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12">
         {/* Hero Image */}
         <div className="mb-8 md:mb-12">
-          <div className="w-80 h-80 md:w-[30rem] md:h-[30rem] mx-auto rounded-full shadow-2xl border-4 border-white relative overflow-hidden bg-gray-100">
+          <div className="w-[30rem] h-[30rem] md:w-[45rem] md:h-[45rem] mx-auto rounded-full shadow-2xl border-4 border-white relative overflow-hidden bg-gray-100">
             <img
               src="/images/logan-memorial.jpg"
               alt="Logan Federico - Remembering a beautiful life"
