@@ -17,14 +17,15 @@ const HeroSection = () => {
       </div>
 
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12">
-        {/* Hero Image Placeholder */}
+        {/* Hero Image */}
         <div className="mb-8 md:mb-12">
-          <div className="w-48 h-48 md:w-64 md:h-64 mx-auto rounded-full bg-gradient-to-br from-primary via-pink-400 to-primary-dark shadow-2xl flex items-center justify-center border-4 border-white relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent"></div>
-            <div className="relative text-white text-center">
-              <div className="text-6xl mb-2">✨</div>
-              <div className="text-sm font-medium">Photo Coming Soon</div>
-            </div>
+          <div className="w-48 h-48 md:w-64 md:h-64 mx-auto rounded-full shadow-2xl border-4 border-white relative overflow-hidden">
+            <img
+              src="/images/logan-memorial.jpg"
+              alt="Logan Federico - Remembering a beautiful life"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent"></div>
           </div>
         </div>
 
