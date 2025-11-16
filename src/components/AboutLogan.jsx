@@ -1,16 +1,33 @@
 import { useState, useEffect } from 'react'
 
+// All 54 gallery images
 const galleryImages = [
   '177237_Original.jpg', '191795_Original.jpg', '20210516_015119.jpg',
-  '20210724_174717_Original.jpg', '20210724_181717.jpg', '67202260809__ED64CECD-2C5F-4CDA-BACD-58842B6589C9.jpg',
+  '20210724_174717_Original.jpg', '20210724_181717.jpg', '276953_resized_Original.jpg',
+  '318333.png', '67202260809__ED64CECD-2C5F-4CDA-BACD-58842B6589C9.jpg',
   '67202369305__3C3B4C06-903C-4C7A-BBCE-66B3F2B4F27E.jpg', '9B6EA637-8BB7-476D-92F3-FE8BD634D3E7_Original.jpg',
   'FB_IMG_1615079967537_Original.jpg', 'FB_IMG_1640635180557.jpg', 'IMG_1023.JPG',
-  'IMG_1422.JPEG', 'IMG_1423.JPG', 'IMG_1430.JPG', 'IMG_4116_Original.jpg',
-  'IMG_4117_Original.jpg', 'IMG_5174.JPG', 'IMG_5307.JPG', 'IMG_5332.JPG',
-  'IMG_6291_Original.jpg', 'IMG_6369.JPG', 'IMG_7874.JPG', 'IMG_7876.JPG',
-  'IMG_8581.jpeg', 'IMG_8692.JPEG', 'IMG_9075.JPG', 'IMG_9076.JPG',
-  'IMG_9077.JPG', 'IMG_9079.JPG', 'IMG_9346.jpg', 'IMG_9578.jpg', 'IMG_9640.jpg', 'image0.JPEG'
+  'IMG_1422.JPEG', 'IMG_1423.JPG', 'IMG_1430.JPG', 'IMG_1478.PNG',
+  'IMG_1479.PNG', 'IMG_1480.PNG', 'IMG_1482.png', 'IMG_1483.png',
+  'IMG_1484.png', 'IMG_1486.png', 'IMG_1487.png', 'IMG_4116_Original.jpg',
+  'IMG_4117_Original.jpg', 'IMG_4391.png', 'IMG_4438.png', 'IMG_5056.png',
+  'IMG_5174.JPG', 'IMG_5302.png', 'IMG_5303.PNG', 'IMG_5307.JPG',
+  'IMG_5332.JPG', 'IMG_6291_Original.jpg', 'IMG_6369.JPG', 'IMG_7065_Original.PNG',
+  'IMG_7874.JPG', 'IMG_7876.JPG', 'IMG_8581.jpeg', 'IMG_8692.JPEG',
+  'IMG_9053.PNG', 'IMG_9075.JPG', 'IMG_9076.JPG', 'IMG_9077.JPG',
+  'IMG_9079.JPG', 'IMG_9346.jpg', 'IMG_9578.jpg', 'IMG_9640.jpg',
+  'Screenshot_20210819-180649_Facebook.jpg', 'Screenshot_20220711-023924_Photos.jpg',
+  'Screenshot_20220714-053506_Photos.jpg', 'Screenshot_20220714-053615_Photos.jpg',
+  'image0.JPEG'
 ]
+
+// Images that need 90-degree rotation (indexes: 12, 42, 43, 45)
+const rotatedImages = new Set([
+  'IMG_1023.JPG',      // index 12
+  'IMG_9075.JPG',      // index 42
+  'IMG_9076.JPG',      // index 43
+  'IMG_9346.jpg'       // index 45
+])
 
 const AboutLogan = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(Math.floor(Math.random() * galleryImages.length))
@@ -75,9 +92,9 @@ const AboutLogan = () => {
               <img
                 src={`/images/gallery/${galleryImages[currentImageIndex]}`}
                 alt={`Logan Federico - Photo ${currentImageIndex + 1}`}
-                className={`w-full h-full object-cover transition-opacity duration-300 ${
+                className={`w-full h-full object-contain transition-opacity duration-300 ${
                   isTransitioning ? 'opacity-0' : 'opacity-100'
-                }`}
+                } ${rotatedImages.has(galleryImages[currentImageIndex]) ? 'rotate-90' : ''}`}
                 onError={(e) => {
                   e.target.src = '/images/logan-memorial.jpg'
                 }}
