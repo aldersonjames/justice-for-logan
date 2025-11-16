@@ -46,7 +46,7 @@ VITE_ADMIN_EMAIL=your-email@example.com
 
 # Recommended
 VITE_CALENDLY_URL=https://calendly.com/your-username
-VITE_GOFUNDME_URL=https://gofundme.com/your-campaign
+VITE_GOFUNDME_URL=https://www.gofundme.com/f/support-logan-federicos-family
 VITE_PETITION_URL=https://change.org/your-petition
 
 # Social Media

@@ -1,3 +1,5 @@
+import { config } from '../utils/config'
+
 const Footer = () => {
   const currentYear = new Date().getFullYear()
 
@@ -59,9 +61,9 @@ const Footer = () => {
                 </svg>
                 <span>Instagram</span>
               </a>
-              <a 
-                href="#" 
-                target="_blank" 
+              <a
+                href={config.goFundMeUrl}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors text-sm"
               >

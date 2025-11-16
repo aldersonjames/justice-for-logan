@@ -1,3 +1,5 @@
+import { config } from '../utils/config'
+
 const Advocacy = () => {
   return (
     <section id="advocacy" className="section-container relative bg-gradient-to-b from-blue-100 via-indigo-50 to-white overflow-hidden">
@@ -104,7 +106,7 @@ const Advocacy = () => {
                   💜
                 </div>
                 <h4 className="font-bold mb-2 text-white drop-shadow">Support the Family</h4>
-                <a href="#" className="text-white hover:text-gray-100 underline text-sm font-medium" target="_blank" rel="noopener noreferrer">GoFundMe</a>
+                <a href={config.goFundMeUrl} className="text-white hover:text-gray-100 underline text-sm font-medium" target="_blank" rel="noopener noreferrer">GoFundMe</a>
               </div>
             </div>
           </div>
