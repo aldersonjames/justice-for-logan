@@ -9,7 +9,7 @@ export const config = {
 
   // External Services
   calendlyUrl: import.meta.env.VITE_CALENDLY_URL || '',
-  goFundMeUrl: import.meta.env.VITE_GOFUNDME_URL || 'https://www.gofundme.com/f/support-logan-federicos-family',
+  goFundMeUrl: import.meta.env.VITE_GOFUNDME_URL || 'https://www.gofundme.com/f/bvqmp-title',
   petitionUrl: import.meta.env.VITE_PETITION_URL || '',
 
   // Social Media
