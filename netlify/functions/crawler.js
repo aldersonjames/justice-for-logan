@@ -1,5 +1,6 @@
 // Netlify Function: Automated Media Crawler
 // Searches for media coverage and returns links to articles, videos, and social media
+// Includes duplicate detection to prevent re-adding existing media coverage
 
 export const handler = async (event, context) => {
   const searchTerms = process.env.CRAWLER_SEARCH_TERMS
@@ -19,16 +20,21 @@ export const handler = async (event, context) => {
     console.log('Starting media crawler...');
     console.log(`Searching for: ${searchTerms.join(', ')}`);
 
+    // Fetch existing media articles from GitHub to prevent duplicates
+    const existingArticles = await fetchExistingMediaArticles();
+    const existingUrls = new Set(existingArticles.map(article => normalizeUrl(article.link)));
+    console.log(`Loaded ${existingUrls.size} existing articles for duplicate detection`);
+
     // Search Google News for each term (finds articles, videos, social media)
     const searchPromises = searchTerms.map(term =>
-      searchGoogleNews(term, results, seenLinks).catch(err => {
+      searchGoogleNews(term, results, seenLinks, existingUrls).catch(err => {
         console.error(`Search error for "${term}":`, err.message);
       })
     );
 
     await Promise.all(searchPromises);
 
-    console.log(`Found ${results.length} links in ${Date.now() - startTime}ms`);
+    console.log(`Found ${results.length} NEW links (duplicates filtered) in ${Date.now() - startTime}ms`);
 
     // Sort by date (newest first)
     results.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -38,7 +44,7 @@ export const handler = async (event, context) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         success: true,
-        message: `Found ${results.length} media links`,
+        message: `Found ${results.length} new media links`,
         count: results.length,
         breakdown: {
           news: results.filter(r => r.type === 'news').length,
@@ -49,7 +55,8 @@ export const handler = async (event, context) => {
         },
         executionTime: `${Date.now() - startTime}ms`,
         links: results,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        existingCount: existingUrls.size
       })
     };
 
@@ -68,7 +75,7 @@ export const handler = async (event, context) => {
 };
 
 // Search Google News RSS - finds everything (news, YouTube, social media)
-async function searchGoogleNews(term, results, seenLinks) {
+async function searchGoogleNews(term, results, seenLinks, existingUrls) {
   const encodedTerm = encodeURIComponent(term);
   const url = `https://news.google.com/rss/search?q=${encodedTerm}&hl=en-US&gl=US&ceid=US:en`;
 
@@ -94,16 +101,25 @@ async function searchGoogleNews(term, results, seenLinks) {
     console.log(`"${term}": found ${items.length} items`);
 
     let added = 0;
+    let skipped = 0;
     for (const item of items.slice(0, 15)) {
       const link = extractLink(item, term);
-      if (link && !seenLinks.has(link.url)) {
+      if (link) {
+        const normalizedUrl = normalizeUrl(link.url);
+
+        // Check if already in current results or existing articles
+        if (seenLinks.has(link.url) || existingUrls.has(normalizedUrl)) {
+          skipped++;
+          continue;
+        }
+
         seenLinks.add(link.url);
         results.push(link);
         added++;
       }
     }
 
-    console.log(`  → Added ${added} unique links`);
+    console.log(`  → Added ${added} unique links, skipped ${skipped} duplicates`);
 
   } catch (error) {
     if (error.name === 'AbortError') {
@@ -166,6 +182,58 @@ function extractLink(item, searchTerm) {
     };
   } catch (error) {
     return null;
+  }
+}
+
+// Fetch existing media articles from GitHub to prevent duplicates
+async function fetchExistingMediaArticles() {
+  const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+  const GITHUB_OWNER = process.env.GITHUB_OWNER;
+  const GITHUB_REPO = process.env.GITHUB_REPO;
+
+  if (!GITHUB_TOKEN || !GITHUB_OWNER || !GITHUB_REPO) {
+    console.warn('GitHub credentials not configured - duplicate detection disabled');
+    return [];
+  }
+
+  try {
+    const filePath = 'src/data/mediaArticles.json';
+    const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}`;
+
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github+json'
+      }
+    });
+
+    if (!response.ok) {
+      console.error(`Failed to fetch mediaArticles.json: ${response.status}`);
+      return [];
+    }
+
+    const fileData = await response.json();
+    const content = Buffer.from(fileData.content, 'base64').toString('utf-8');
+    const articles = JSON.parse(content);
+
+    console.log(`Loaded ${articles.length} existing articles from GitHub`);
+    return articles;
+  } catch (error) {
+    console.error('Error fetching existing articles:', error.message);
+    return [];
+  }
+}
+
+// Normalize URLs for duplicate detection
+// Removes query parameters, fragments, and trailing slashes
+function normalizeUrl(url) {
+  try {
+    const urlObj = new URL(url);
+    // Remove query params and hash
+    return `${urlObj.protocol}//${urlObj.host}${urlObj.pathname}`.replace(/\/$/, '').toLowerCase();
+  } catch (error) {
+    // If URL parsing fails, return lowercase version
+    return url.toLowerCase().replace(/\/$/, '');
   }
 }
 

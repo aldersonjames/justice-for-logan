@@ -1,101 +1,41 @@
 [
   {
     "id": 1,
-    "name": "Sarah Mitchell",
+    "name": "Example Story",
     "type": "story",
-    "relationship": "Best Friend",
-    "date": "2024-10-15",
-    "message": "Logan was the kind of friend who would drop everything to be there for you. I'll never forget when I was going through a tough breakup and she showed up at my door at midnight with ice cream and her favorite Taylor Swift playlist. We spent the whole night singing along and laughing through tears. She had this incredible gift of making you feel like everything would be okay. I miss her every single day.",
+    "relationship": "Friend / Family / Colleague",
+    "date": "2025-11-16",
+    "message": "Share a favorite memory or story about Logan. What made her special? What moments do you cherish? Your stories help keep her memory alive and show the world who she truly was.",
     "approved": true,
-    "featured": true
+    "featured": false
   },
   {
     "id": 2,
-    "name": "Marcus Johnson",
+    "name": "Example Photo Memory",
     "type": "photo",
-    "relationship": "Childhood Friend",
-    "date": "2024-10-18",
-    "message": "This was Logan at the Eagles game last year. Look at that smile! She was so happy that day. Go Birds forever, Logan. We won't stop fighting for you.",
+    "relationship": "Friend / Family / Colleague",
+    "date": "2025-11-16",
+    "message": "Share a memory about a special photo of Logan. Describe the moment, the occasion, or what made it meaningful. Photos capture moments, but your words capture the feeling.",
     "approved": true,
     "featured": false
   },
   {
     "id": 3,
-    "name": "Emily Rodriguez",
+    "name": "Example Tribute",
     "type": "tribute",
-    "relationship": "College Friend",
-    "date": "2024-10-20",
-    "message": "Logan, you were a light in this world. Your kindness, your laughter, your fierce loyalty - these are the things I'll carry with me always. Justice will be served. Your memory will never fade.",
+    "relationship": "Friend / Family / Community Member",
+    "date": "2025-11-16",
+    "message": "Share a tribute to Logan - how she touched your life, what she meant to you, or how you'll honor her memory. Tributes celebrate her impact and the legacy she leaves behind.",
     "approved": true,
-    "featured": true
+    "featured": false
   },
   {
     "id": 4,
-    "name": "David Chen",
-    "type": "story",
-    "relationship": "Family Friend",
-    "date": "2024-10-22",
-    "message": "I've known Logan since she was a little girl, and watching her grow into the amazing woman she became was an honor. She volunteered at the local animal shelter every weekend and had this special way with the scared dogs - she'd sit with them for hours until they trusted her. That's who Logan was: patient, loving, and determined to make the world better.",
-    "approved": true,
-    "featured": false
-  },
-  {
-    "id": 5,
-    "name": "Jennifer Taylor",
+    "name": "Example Message",
     "type": "message",
-    "relationship": "Neighbor",
-    "date": "2024-10-25",
-    "message": "To Logan's family: My heart breaks for you. Logan always greeted me with the biggest smile whenever we crossed paths in the neighborhood. She was sunshine personified. I'm praying for justice and sending all my love to your family during this impossible time.",
-    "approved": true,
-    "featured": false
-  },
-  {
-    "id": 6,
-    "name": "Robert \"Coach\" Williams",
-    "type": "story",
-    "relationship": "Former Teacher",
-    "date": "2024-10-28",
-    "message": "I coached Logan in high school volleyball, and she was the heart of our team. Not the tallest or the strongest, but she had more heart than anyone I've ever coached. She'd dive for every ball, encourage her teammates constantly, and never gave up. Off the court, she'd check in on teammates who were struggling and organize study sessions. She made everyone around her better. That's the Logan I'll always remember.",
-    "approved": true,
-    "featured": true
-  },
-  {
-    "id": 7,
-    "name": "Amanda Foster",
-    "type": "photo",
-    "relationship": "Cousin",
-    "date": "2024-11-01",
-    "message": "My favorite memory with Logan - our annual summer trip to the beach. We'd stay up all night talking about our dreams and what we wanted from life. She wanted to help people, to make a difference. She did make a difference. She changed all of us for the better. Love you forever, cousin.",
-    "approved": true,
-    "featured": false
-  },
-  {
-    "id": 8,
-    "name": "Michael Thompson",
-    "type": "tribute",
-    "relationship": "Work Colleague",
-    "date": "2024-11-03",
-    "message": "Logan brought joy to our workplace every single day. Her laugh was contagious, her work ethic inspiring. She treated everyone with respect - from the CEO to the janitor. The world lost someone truly special. We stand with her family in demanding justice.",
-    "approved": true,
-    "featured": false
-  },
-  {
-    "id": 9,
-    "name": "Rachel Green",
-    "type": "story",
-    "relationship": "Friend",
-    "date": "2024-11-05",
-    "message": "Logan and I bonded over our shared love of Taylor Swift. We had tickets to the Eras Tour together - it was supposed to be our dream come true. When the concert came around, I brought a picture of her and held it up during 'Marjorie.' I felt her there with me. The friendship bracelets we made together still hang on my wall. You deserved so much more time, Logan.",
-    "approved": true,
-    "featured": true
-  },
-  {
-    "id": 10,
-    "name": "Patricia Santos",
-    "type": "message",
-    "relationship": "Community Member",
-    "date": "2024-11-08",
-    "message": "Though I didn't know Logan personally, her story has touched my heart deeply. As a mother, I cannot imagine the pain her family is going through. I'm committed to supporting this fight for justice and honoring Logan's memory. No family should have to endure this. Sending love and strength.",
+    "relationship": "Friend / Family / Community Supporter",
+    "date": "2025-11-16",
+    "message": "Share a message of support for Logan's family, words of comfort, or your commitment to justice. Every message of solidarity strengthens the fight for change.",
     "approved": true,
     "featured": false
   }

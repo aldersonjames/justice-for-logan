@@ -10,6 +10,7 @@ import MediaPage from './pages/MediaPage'
 import AdvocacyPage from './pages/AdvocacyPage'
 import EventsPage from './pages/EventsPage'
 import ContactPage from './pages/ContactPage'
+import AdminPage from './pages/AdminPage'
 import { initializeAnalytics, trackPageView } from './utils/analytics'
 
 // Scroll to top on route change
@@ -44,6 +45,7 @@ function App() {
               <Route path="/advocacy" element={<AdvocacyPage />} />
               <Route path="/events" element={<EventsPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/admin" element={<AdminPage />} />
             </Routes>
           </main>
           <Footer />

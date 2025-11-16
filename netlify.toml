@@ -27,6 +27,14 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Form notifications - Configure in Netlify UI at Site Settings > Forms > Form notifications
-# The guestbook form will send submissions to the email address you configure there
+# Form notifications
+# After deployment, configure email notifications in Netlify dashboard:
+# 1. Go to: Site Settings > Forms > Form notifications
+# 2. Click "Add notification" > "Email notification"
+# 3. Set email to: steve@justiceforlogan.com
+# 4. Select which forms to receive notifications for:
+#    - guestbook (from Guestbook component)
+#    - memory-wall (from Memory Wall component)
+#    - media-booking (from Media Booking component)
+#    - newsletter (from Newsletter component)
 
