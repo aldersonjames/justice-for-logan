@@ -1,44 +1,65 @@
 [
   {
     "id": 1,
-    "name": "Sarah Mitchell",
-    "relationship": "Best Friend",
-    "quote": "Logan had this incredible ability to light up every room she walked into. Her laugh was contagious, her spirit unbreakable. She taught me what it means to live authentically and love fearlessly. The world lost something truly special when we lost Logan, but her impact on all of us will last forever.",
+    "name": "Scott Johnston",
+    "relationship": "Community Supporter (GoFundMe)",
+    "quote": "When I heard Mr Frederico say 'you pissed off the wrong daddy' I was all in. It's good to see a pissed off dad letting the criminals (the ones with ties and without) know that you will never forget me or Logan. God bless you and your family. Enough! If I can do anything going forward, I'm in.",
     "image": "/placeholder-avatar-1.jpg"
   },
   {
     "id": 2,
-    "name": "Marcus Johnson",
-    "relationship": "Community Member",
-    "quote": "Watching Logan's family fight for justice has been nothing short of inspiring. Their strength in the face of unimaginable tragedy shows what true advocacy looks like. This isn't just about Logan - it's about making sure no other family has to go through what they've endured. We stand with them, now and always.",
+    "name": "John Carlo",
+    "relationship": "Community Supporter (GoFundMe)",
+    "quote": "Honestly, there's no words! Your daughter and family deserve justice and I won't stop until you get it! We will get results with these judges and things WILL change or we'll make them.",
     "image": "/placeholder-avatar-2.jpg"
   },
   {
     "id": 3,
-    "name": "Emily Rodriguez",
-    "relationship": "Former Classmate",
-    "quote": "Logan was the kind of person who genuinely cared about everyone she met. She had dreams, plans for the future, and so much life ahead of her. It's heartbreaking that those dreams were stolen. But seeing her family's courage and determination to seek justice gives me hope that Logan's legacy will spark real change.",
+    "name": "Gina Gullotta",
+    "relationship": "Community Supporter (GoFundMe)",
+    "quote": "This could happen to anyone including myself and if we don't all unify as one this insanity will keep happening. I will be a voice for Logan because some degenerate waste of sperm took her voice. Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go. - Joshua 1:9",
     "image": "/placeholder-avatar-3.jpg"
   },
   {
     "id": 4,
-    "name": "David Chen",
-    "relationship": "Neighbor",
-    "quote": "I've known Logan's family for years, and the strength they've shown through this tragedy is remarkable. They could have retreated into grief, but instead they're fighting to prevent other families from experiencing this pain. Their advocacy work is changing lives and saving lives. Logan would be so proud of them.",
+    "name": "Ryan Nakafuji",
+    "relationship": "Community Supporter (GoFundMe)",
+    "quote": "Sincere condolences to the Federico family. I support Mr. Federico in fighting for justice on behalf of his daughter, Logan. May God bless the Federico family, and rest in peace, Logan!",
     "image": "/placeholder-avatar-4.jpg"
   },
   {
     "id": 5,
-    "name": "Rebecca Thompson",
-    "relationship": "Family Friend",
-    "quote": "Logan's smile could brighten the darkest day. She was kind, compassionate, and full of life. What happened to her should never happen to anyone. Her family's relentless pursuit of justice and their efforts to raise awareness about these issues is transforming tragedy into purpose. We're all behind them.",
+    "name": "Kate Higgins",
+    "relationship": "Community Supporter (GoFundMe)",
+    "quote": "We stand with you. These judges are acting irresponsibly and putting the public in danger by releasing dangerous criminals back onto the streets. There must be accountability. No one, not even a judge, should be above the law. Justice should protect the innocent, not empower the guilty.",
     "image": "/placeholder-avatar-5.jpg"
   },
   {
     "id": 6,
-    "name": "James Patterson",
-    "relationship": "Advocacy Partner",
-    "quote": "Working alongside Logan's family in their advocacy efforts has been humbling. They've taken their deepest pain and channeled it into a movement that's making real legislative change. Their courage to speak out, to share their story, to demand accountability - it's creating a safer world for all of us. This is Logan's lasting impact.",
+    "name": "Lana Norris",
+    "relationship": "Community Supporter (GoFundMe)",
+    "quote": "God bless Logan and her family. Your death will not be in vain, I will make sure of it too! I will support your father as best I can in his journey for justice.",
     "image": "/placeholder-avatar-6.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Donald Cameron",
+    "relationship": "International Supporter (Tasmania)",
+    "quote": "Our thoughts are with all the Federico family from over the seas in Tasmania. Truly tragic.",
+    "image": "/placeholder-avatar-7.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Toni McGrath",
+    "relationship": "Community Supporter (GoFundMe)",
+    "quote": "Mr. Federico, I stand with you! Keep speaking loudly!",
+    "image": "/placeholder-avatar-8.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Shanne Fowler",
+    "relationship": "Community Supporter (GoFundMe)",
+    "quote": "I am so sorry for your loss. I will continue the fight against a broken system and encourage others to do the same. This should have never happened. God bless the Federico family. Logan will never be forgotten.",
+    "image": "/placeholder-avatar-9.jpg"
   }
 ]
