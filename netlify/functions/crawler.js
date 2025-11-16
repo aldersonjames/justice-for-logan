@@ -1,58 +1,70 @@
 // Netlify Function: Automated Media Crawler
 // This function searches for new coverage about Logan Federico across multiple platforms
-// Run on a schedule (daily) using Netlify Scheduled Functions
+// Optimized for Netlify's 10-second function timeout
 
 export const handler = async (event, context) => {
   const searchTerms = process.env.CRAWLER_SEARCH_TERMS
-    ? process.env.CRAWLER_SEARCH_TERMS.split(',')
+    ? process.env.CRAWLER_SEARCH_TERMS.split(',').map(t => t.trim())
     : [
         'Logan Federico',
         'Justice for Logan',
-        'Stephen Federico testimony',
-        'Alexander Dickey Columbia murder',
-        'Waxhaw woman killed Columbia SC',
-        'Logan Federico bail reform'
+        'Stephen Federico'
       ];
 
   const results = [];
   const seenLinks = new Set();
+  const startTime = Date.now();
+  const MAX_EXECUTION_TIME = 8000; // 8 seconds max (leave 2s buffer)
 
   try {
     console.log('Starting multi-platform media crawler...');
-    console.log(`Searching ${searchTerms.length} terms across multiple platforms...`);
+    console.log(`Searching ${searchTerms.length} terms...`);
+
+    // Run searches in parallel for speed
+    const searchPromises = [];
 
     for (const term of searchTerms) {
-      console.log(`\n=== Searching for: "${term}" ===`);
+      // Check if we're running out of time
+      if (Date.now() - startTime > MAX_EXECUTION_TIME) {
+        console.log('Timeout approaching, stopping searches');
+        break;
+      }
 
-      // 1. Google News RSS
-      await searchGoogleNews(term, results, seenLinks);
+      console.log(`Searching for: "${term}"`);
 
-      // 2. YouTube RSS (no API key needed)
-      await searchYouTube(term, results, seenLinks);
+      // Search Google News (fast, reliable)
+      searchPromises.push(
+        searchGoogleNews(term, results, seenLinks).catch(err => {
+          console.error(`Google News error for "${term}":`, err.message);
+        })
+      );
 
-      // 3. Major News Outlets RSS
-      await searchMajorOutlets(term, results, seenLinks);
-
-      // Rate limiting between terms
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Search YouTube if API key is available
+      if (process.env.YOUTUBE_API_KEY) {
+        searchPromises.push(
+          searchYouTube(term, results, seenLinks).catch(err => {
+            console.error(`YouTube error for "${term}":`, err.message);
+          })
+        );
+      }
     }
 
-    console.log(`\n=== TOTAL RESULTS: ${results.length} new articles ===`);
+    // Wait for all searches to complete (or timeout)
+    await Promise.race([
+      Promise.all(searchPromises),
+      new Promise(resolve => setTimeout(resolve, MAX_EXECUTION_TIME))
+    ]);
+
+    console.log(`\nTotal results: ${results.length} articles`);
+    console.log(`Execution time: ${Date.now() - startTime}ms`);
 
     // Sort by date (newest first)
     results.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    // If articles found, send notification email
-    if (results.length > 0 && process.env.CRAWLER_EMAIL_RECIPIENT) {
-      await sendNotificationEmail(results);
-    }
-
-    // Return results
-    return {
+    // Return results immediately (don't wait for email)
+    const response = {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         success: true,
         message: `Found ${results.length} new articles`,
@@ -64,176 +76,143 @@ export const handler = async (event, context) => {
           social: results.filter(r => r.type === 'social').length,
           press: results.filter(r => r.type === 'press').length
         },
+        executionTime: `${Date.now() - startTime}ms`,
         articles: results,
         timestamp: new Date().toISOString()
       })
     };
 
+    // Log email notification asynchronously (don't block response)
+    if (results.length > 0 && process.env.CRAWLER_EMAIL_RECIPIENT) {
+      sendNotificationEmail(results).catch(err =>
+        console.error('Email notification failed:', err)
+      );
+    }
+
+    return response;
+
   } catch (error) {
     console.error('Crawler error:', error);
     return {
       statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         success: false,
         error: error.message,
+        executionTime: `${Date.now() - startTime}ms`,
         timestamp: new Date().toISOString()
       })
     };
   }
 };
 
-// 1. Google News RSS Search
+// 1. Google News RSS Search (Fast & Reliable)
 async function searchGoogleNews(term, results, seenLinks) {
-  const encodedTerm = encodeURIComponent(term.trim());
-  const googleNewsUrl = `https://news.google.com/rss/search?q=${encodedTerm}&hl=en-US&gl=US&ceid=US:en`;
+  const encodedTerm = encodeURIComponent(term);
+  const url = `https://news.google.com/rss/search?q=${encodedTerm}&hl=en-US&gl=US&ceid=US:en`;
 
   try {
-    const response = await fetch(googleNewsUrl, {
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; JusticeForLoganBot/1.0)' }
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000); // 3s timeout
+
+    const response = await fetch(url, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; JusticeForLoganBot/1.0)' },
+      signal: controller.signal
     });
 
+    clearTimeout(timeoutId);
+
     if (!response.ok) {
-      console.error(`Google News failed for "${term}": ${response.status}`);
+      console.error(`Google News HTTP ${response.status} for "${term}"`);
       return;
     }
 
     const xml = await response.text();
     const items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
 
-    console.log(`  → Google News: ${items.length} items found`);
+    console.log(`  → Google News: ${items.length} items`);
 
-    for (const item of items.slice(0, 15)) {
+    let added = 0;
+    for (const item of items.slice(0, 10)) {
       const article = parseRSSItem(item, term, 'Google News');
       if (article && !seenLinks.has(article.link)) {
         seenLinks.add(article.link);
         results.push(article);
+        added++;
       }
     }
+
+    console.log(`  → Added ${added} unique articles`);
+
   } catch (error) {
-    console.error(`Google News error for "${term}":`, error.message);
+    if (error.name === 'AbortError') {
+      console.error(`Google News timeout for "${term}"`);
+    } else {
+      console.error(`Google News error for "${term}":`, error.message);
+    }
   }
 }
 
-// 2. YouTube RSS Search
+// 2. YouTube API Search (Requires API Key)
 async function searchYouTube(term, results, seenLinks) {
-  // YouTube RSS feed by search (uses YouTube's search RSS)
-  const encodedTerm = encodeURIComponent(term.trim());
+  if (!process.env.YOUTUBE_API_KEY) {
+    console.log('  → YouTube: Skipped (no API key)');
+    return;
+  }
 
-  // YouTube doesn't have a direct search RSS, but we can search their channel feeds
-  // Alternative: Use YouTube's search URL which sometimes has RSS
-  const youtubeSearchUrl = `https://www.youtube.com/results?search_query=${encodedTerm}&sp=CAI%253D`;
+  const encodedTerm = encodeURIComponent(term);
+  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodedTerm}&type=video&maxResults=5&key=${process.env.YOUTUBE_API_KEY}`;
 
   try {
-    // Note: YouTube's RSS is limited. For better results, you'd need YouTube Data API v3
-    // For now, we'll log that YouTube search would happen here
-    console.log(`  → YouTube: Search would be performed (requires API key for full functionality)`);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000);
 
-    // If you have a YouTube API key, set YOUTUBE_API_KEY in environment
-    if (process.env.YOUTUBE_API_KEY) {
-      const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodedTerm}&type=video&maxResults=10&key=${process.env.YOUTUBE_API_KEY}`;
+    const response = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeoutId);
 
-      const response = await fetch(apiUrl);
-      if (!response.ok) {
-        console.error(`YouTube API failed: ${response.status}`);
-        return;
-      }
+    if (!response.ok) {
+      console.error(`YouTube API HTTP ${response.status}`);
+      return;
+    }
 
-      const data = await response.json();
-      console.log(`  → YouTube API: ${data.items?.length || 0} videos found`);
+    const data = await response.json();
+    const items = data.items || [];
 
-      for (const item of data.items || []) {
-        const videoUrl = `https://www.youtube.com/watch?v=${item.id.videoId}`;
+    console.log(`  → YouTube: ${items.length} videos`);
 
-        if (!seenLinks.has(videoUrl)) {
-          seenLinks.add(videoUrl);
-          results.push({
-            id: Date.now() + Math.floor(Math.random() * 1000),
-            headline: item.snippet.title,
-            link: videoUrl,
-            outlet: item.snippet.channelTitle,
-            date: new Date(item.snippet.publishedAt).toISOString().split('T')[0],
-            description: item.snippet.description.substring(0, 200),
-            type: 'video',
-            approved: false,
-            submittedBy: 'auto-crawler',
-            submittedAt: new Date().toISOString(),
-            searchTerm: term,
-            platform: 'YouTube'
-          });
-        }
+    let added = 0;
+    for (const item of items) {
+      const videoUrl = `https://www.youtube.com/watch?v=${item.id.videoId}`;
+
+      if (!seenLinks.has(videoUrl)) {
+        seenLinks.add(videoUrl);
+        results.push({
+          id: Date.now() + Math.floor(Math.random() * 10000),
+          headline: item.snippet.title,
+          link: videoUrl,
+          outlet: item.snippet.channelTitle,
+          date: new Date(item.snippet.publishedAt).toISOString().split('T')[0],
+          description: item.snippet.description.substring(0, 200),
+          type: 'video',
+          approved: false,
+          submittedBy: 'auto-crawler',
+          submittedAt: new Date().toISOString(),
+          searchTerm: term,
+          platform: 'YouTube'
+        });
+        added++;
       }
     }
+
+    console.log(`  → Added ${added} unique videos`);
+
   } catch (error) {
-    console.error(`YouTube error for "${term}":`, error.message);
-  }
-}
-
-// 3. Major News Outlets RSS Feeds
-async function searchMajorOutlets(term, results, seenLinks) {
-  const outlets = [
-    // South Carolina Local News
-    { name: 'The State (SC)', url: 'https://www.thestate.com/news/?widgetName=rssfeed&widgetContentId=712015&getXmlFeed=true' },
-    { name: 'Charlotte Observer', url: 'https://www.charlotteobserver.com/news/?widgetName=rssfeed&widgetContentId=712015&getXmlFeed=true' },
-    { name: 'WBTV Charlotte', url: 'https://www.wbtv.com/news/?outputType=rss' },
-    { name: 'WIS News 10', url: 'https://www.wistv.com/news/?outputType=rss' },
-
-    // National outlets
-    { name: 'CNN', url: 'http://rss.cnn.com/rss/cnn_topstories.rss' },
-    { name: 'ABC News', url: 'https://abcnews.go.com/abcnews/topstories' },
-    { name: 'NBC News', url: 'https://feeds.nbcnews.com/nbcnews/public/news' },
-    { name: 'CBS News', url: 'https://www.cbsnews.com/latest/rss/main' },
-    { name: 'Fox News', url: 'https://moxie.foxnews.com/google-publisher/latest.xml' },
-
-    // Crime/Justice focused
-    { name: 'Crime Online', url: 'https://www.crimeonline.com/feed/' },
-    { name: 'Law & Crime', url: 'https://lawandcrime.com/feed/' }
-  ];
-
-  console.log(`  → Searching ${outlets.length} major news outlets...`);
-
-  const termLower = term.toLowerCase();
-  let outletMatches = 0;
-
-  for (const outlet of outlets) {
-    try {
-      const response = await fetch(outlet.url, {
-        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; JusticeForLoganBot/1.0)' },
-        timeout: 5000
-      });
-
-      if (!response.ok) continue;
-
-      const xml = await response.text();
-      const items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
-
-      // Filter items that match our search term
-      for (const item of items) {
-        const titleMatch = item.match(/<title>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/title>/);
-        const title = titleMatch?.[1] || '';
-
-        // Check if title or description contains search term
-        if (title.toLowerCase().includes(termLower) || item.toLowerCase().includes(termLower)) {
-          const article = parseRSSItem(item, term, outlet.name);
-          if (article && !seenLinks.has(article.link)) {
-            seenLinks.add(article.link);
-            results.push(article);
-            outletMatches++;
-          }
-        }
-      }
-
-      // Rate limit between outlets
-      await new Promise(resolve => setTimeout(resolve, 500));
-    } catch (error) {
-      // Silently skip failed outlets
-      continue;
+    if (error.name === 'AbortError') {
+      console.error('YouTube timeout');
+    } else {
+      console.error('YouTube error:', error.message);
     }
   }
-
-  console.log(`  → Major outlets: ${outletMatches} relevant articles found`);
 }
 
 // Helper: Parse RSS item into article object
@@ -258,11 +237,14 @@ function parseRSSItem(item, searchTerm, sourceName) {
     const lowerTitle = title.toLowerCase();
     const lowerLink = link.toLowerCase();
 
-    if (lowerLink.includes('youtube.com') || lowerLink.includes('youtu.be') || lowerTitle.includes('video') || lowerTitle.includes('watch')) {
+    if (lowerLink.includes('youtube.com') || lowerLink.includes('youtu.be') ||
+        lowerTitle.includes('video') || lowerTitle.includes('watch')) {
       type = 'video';
-    } else if (lowerLink.includes('facebook.com') || lowerLink.includes('twitter.com') || lowerLink.includes('instagram.com') || lowerLink.includes('tiktok.com')) {
+    } else if (lowerLink.includes('facebook.com') || lowerLink.includes('twitter.com') ||
+               lowerLink.includes('instagram.com') || lowerLink.includes('tiktok.com')) {
       type = 'social';
-    } else if (lowerTitle.includes('interview') || lowerTitle.includes('speaks out') || lowerTitle.includes('testimony')) {
+    } else if (lowerTitle.includes('interview') || lowerTitle.includes('speaks out') ||
+               lowerTitle.includes('testimony')) {
       type = 'interview';
     } else if (lowerTitle.includes('press release') || lowerTitle.includes('statement')) {
       type = 'press';
@@ -286,15 +268,15 @@ function parseRSSItem(item, searchTerm, sourceName) {
   }
 }
 
-// Helper function to send email notification
+// Helper: Send email notification (async, non-blocking)
 async function sendNotificationEmail(articles) {
   if (!process.env.CRAWLER_EMAIL_RECIPIENT) {
-    console.log('Email notification skipped: missing CRAWLER_EMAIL_RECIPIENT');
+    console.log('Email skipped: no recipient configured');
     return;
   }
 
   try {
-    // Group articles by type
+    // Group by type
     const byType = {
       video: articles.filter(a => a.type === 'video'),
       interview: articles.filter(a => a.type === 'interview'),
@@ -303,71 +285,64 @@ async function sendNotificationEmail(articles) {
       press: articles.filter(a => a.type === 'press')
     };
 
-    // Format articles for email
+    // Format for email
     let articleList = '';
-
     for (const [type, items] of Object.entries(byType)) {
       if (items.length > 0) {
         articleList += `\n${type.toUpperCase()} (${items.length}):\n`;
-        items.forEach(article => {
-          articleList += `  • ${article.headline}\n    Source: ${article.outlet}\n    Link: ${article.link}\n    Date: ${article.date}\n\n`;
+        items.slice(0, 5).forEach(article => {
+          articleList += `  • ${article.headline}\n    ${article.outlet} - ${article.date}\n    ${article.link}\n\n`;
         });
+        if (items.length > 5) {
+          articleList += `  ... and ${items.length - 5} more\n\n`;
+        }
       }
     }
 
     const emailBody = `
-New Media Coverage Found for Justice for Logan
-================================================
+Justice for Logan - New Media Coverage Found
+=============================================
 
-The automated crawler has found ${articles.length} new item(s) across multiple platforms:
+Found ${articles.length} new item(s):
 
 ${articleList}
 
 BREAKDOWN:
 - Videos: ${byType.video.length}
 - Interviews: ${byType.interview.length}
-- News Articles: ${byType.news.length}
-- Social Media: ${byType.social.length}
-- Press Releases: ${byType.press.length}
+- News: ${byType.news.length}
+- Social: ${byType.social.length}
+- Press: ${byType.press.length}
 
-TO PUBLISH THESE ARTICLES:
-1. Go to Netlify Functions logs: https://app.netlify.com
-2. View the full crawler response JSON
-3. Copy approved articles to src/data/mediaArticles.json
-4. Commit and push to deploy
+View full results in Netlify Functions logs:
+https://app.netlify.com
 
 ---
-This is an automated message from the Justice for Logan media crawler.
-Timestamp: ${new Date().toISOString()}
+${new Date().toISOString()}
     `.trim();
 
-    console.log('Email notification would be sent to:', process.env.CRAWLER_EMAIL_RECIPIENT);
-    console.log('\n=== EMAIL PREVIEW ===');
+    console.log('\n=== EMAIL NOTIFICATION ===');
+    console.log(`To: ${process.env.CRAWLER_EMAIL_RECIPIENT}`);
     console.log(emailBody);
-    console.log('===================\n');
+    console.log('========================\n');
 
-    // Note: To actually send email, integrate with:
-    // - SendGrid: https://www.npmjs.com/package/@sendgrid/mail
-    // - Mailgun: https://www.npmjs.com/package/mailgun-js
-    // - AWS SES: https://www.npmjs.com/package/@aws-sdk/client-ses
+    // TODO: Integrate with SendGrid, Mailgun, or AWS SES
     // Example with SendGrid:
-    /*
-    const sgMail = require('@sendgrid/mail');
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    await sgMail.send({
-      to: process.env.CRAWLER_EMAIL_RECIPIENT,
-      from: 'crawler@justiceforlogan.com',
-      subject: `[Justice for Logan] ${articles.length} new media items found`,
-      text: emailBody
-    });
-    */
+    // const sgMail = require('@sendgrid/mail');
+    // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    // await sgMail.send({
+    //   to: process.env.CRAWLER_EMAIL_RECIPIENT,
+    //   from: 'crawler@justiceforlogan.com',
+    //   subject: `[Justice for Logan] ${articles.length} new media items`,
+    //   text: emailBody
+    // });
 
-  } catch (emailError) {
-    console.error('Error sending notification email:', emailError);
+  } catch (error) {
+    console.error('Email error:', error.message);
   }
 }
 
-// Schedule this function to run daily at 9 AM UTC
+// Schedule: Daily at 9 AM UTC (4 AM EST / 5 AM EDT)
 export const config = {
-  schedule: '0 9 * * *' // Cron format: At 09:00 every day
+  schedule: '0 9 * * *'
 };
