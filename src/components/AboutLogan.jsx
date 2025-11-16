@@ -21,18 +21,20 @@ const galleryImages = [
   'image0.JPEG'
 ]
 
-// Images that need 90-degree rotation (indexes: 12, 42, 43, 45)
-const rotatedImages = new Set([
-  'IMG_1023.JPG',      // index 12
-  'IMG_9075.JPG',      // index 42
-  'IMG_9076.JPG',      // index 43
-  'IMG_9346.jpg'       // index 45
-])
+// Images that need rotation
+const rotatedImages = {
+  'IMG_1023.JPG': 90,      // index 12 - sideways
+  'IMG_1422.JPEG': 180,    // index 13 - upside down
+  'IMG_9075.JPG': 90,      // index 42 - sideways
+  'IMG_9076.JPG': 90,      // index 43 - sideways
+  'IMG_9346.jpg': 90       // index 45 - sideways
+}
 
 const AboutLogan = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(Math.floor(Math.random() * galleryImages.length))
   const [thumbnailStart, setThumbnailStart] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
 
   // Auto-advance slideshow every 5 seconds
   useEffect(() => {
@@ -88,22 +90,41 @@ const AboutLogan = () => {
           {/* Photo Gallery with Slideshow */}
           <div className="space-y-4">
             {/* Main Photo Display */}
-            <div className="relative rounded-2xl shadow-2xl overflow-hidden aspect-square bg-gray-100">
+            <div
+              className="relative rounded-2xl shadow-2xl overflow-hidden aspect-square bg-gray-100 cursor-pointer group"
+              onClick={() => setLightboxOpen(true)}
+            >
               <img
                 src={`/images/gallery/${galleryImages[currentImageIndex]}`}
                 alt={`Logan Federico - Photo ${currentImageIndex + 1}`}
-                className={`w-full h-full object-contain transition-opacity duration-300 ${
+                className={`w-full h-full object-cover transition-opacity duration-300 ${
                   isTransitioning ? 'opacity-0' : 'opacity-100'
-                } ${rotatedImages.has(galleryImages[currentImageIndex]) ? 'rotate-90' : ''}`}
+                }`}
+                style={{
+                  transform: rotatedImages[galleryImages[currentImageIndex]]
+                    ? `rotate(${rotatedImages[galleryImages[currentImageIndex]]}deg)`
+                    : 'none'
+                }}
                 onError={(e) => {
                   e.target.src = '/images/logan-memorial.jpg'
                 }}
               />
+              {/* Click to expand overlay */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 rounded-full p-3 text-gray-800">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                  </svg>
+                </div>
+              </div>
 
               {/* Navigation Arrows */}
               <button
-                onClick={previousImage}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-3 shadow-lg transition-all hover:scale-110"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  previousImage()
+                }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-3 shadow-lg transition-all hover:scale-110 z-10"
                 aria-label="Previous photo"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -111,8 +132,11 @@ const AboutLogan = () => {
                 </svg>
               </button>
               <button
-                onClick={nextImage}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-3 shadow-lg transition-all hover:scale-110"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  nextImage()
+                }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-3 shadow-lg transition-all hover:scale-110 z-10"
                 aria-label="Next photo"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -238,6 +262,70 @@ const AboutLogan = () => {
           </div>
         </div>
       </div>
+
+      {/* Lightbox Modal for Full Resolution Photos */}
+      {lightboxOpen && (
+        <div
+          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
+          onClick={() => setLightboxOpen(false)}
+        >
+          {/* Close button */}
+          <button
+            onClick={() => setLightboxOpen(false)}
+            className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 text-white rounded-full p-3 transition-all z-10"
+            aria-label="Close"
+          >
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              previousImage()
+            }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white rounded-full p-4 transition-all hover:scale-110 z-10"
+            aria-label="Previous photo"
+          >
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              nextImage()
+            }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white rounded-full p-4 transition-all hover:scale-110 z-10"
+            aria-label="Next photo"
+          >
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {/* Full Resolution Image */}
+          <div className="max-w-7xl max-h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={`/images/gallery/${galleryImages[currentImageIndex]}`}
+              alt={`Logan Federico - Photo ${currentImageIndex + 1}`}
+              className="max-w-full max-h-[90vh] object-contain"
+              style={{
+                transform: rotatedImages[galleryImages[currentImageIndex]]
+                  ? `rotate(${rotatedImages[galleryImages[currentImageIndex]]}deg)`
+                  : 'none'
+              }}
+            />
+          </div>
+
+          {/* Photo Counter */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/10 text-white px-4 py-2 rounded-full text-sm">
+            {currentImageIndex + 1} / {galleryImages.length}
+          </div>
+        </div>
+      )}
     </section>
   )
 }
